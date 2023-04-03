@@ -2,10 +2,10 @@ export interface Journey {
   id: string;
   departure: Date;
   return: Date;
-  departureStationId: Number;
-  departureStationName: String;
-  returnStationId: Number;
-  returnStationName: String;
-  coveredDistance: Number;
-  duration: Number;
+  departureStationId: number;
+  departureStationName: string;
+  returnStationId: number;
+  returnStationName: string;
+  coveredDistance: number;
+  duration: number;
 }

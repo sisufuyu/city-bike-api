@@ -6,6 +6,6 @@ import { JourneysModule } from './journeys/journeys.module';
 @Module({
   imports: [JourneysModule],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService]
 })
 export class AppModule {}
