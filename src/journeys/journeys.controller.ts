@@ -8,32 +8,36 @@ import {
   Put, 
   Query,
 } from '@nestjs/common';
+import { Journey } from './interfaces/journey.interface';
+import { JourneysService } from './journeys.service';
 
 @Controller('journeys')
 export class JourneysController {
+  constructor(private journeyService: JourneysService) {}
+  
   @Get()
-  findAll(@Query() paginationQuery): string {
-    const { limit, offset } = paginationQuery
-    return `This action returns all journeys, Limit ${limit}, offset ${offset}`;
+  findAll(@Query() paginationQuery): Journey[] {
+    // const { limit, offset } = paginationQuery
+    return this.journeyService.findAll();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string): string {
-    return `This action returns a ${id} journey`;
+  findOne(@Param('id') id: string): Journey {
+    return this.journeyService.findOne(id);
   }
 
   @Post()
   create(@Body() body) {
-    return body;
+    return this.journeyService.create(body);
   }
 
   @Put(':id')
   update(@Param('id') id: string, @Body() body) {
-    return `This action updates a ${id} journey`;
+    return this.journeyService.update(id, body);
   }
 
   @Delete(':id')
   remove(@Param('id') id:string) {
-    return `This action deletes a ${id} journey`;
+    return this.journeyService.remove(id);
   }
 }
