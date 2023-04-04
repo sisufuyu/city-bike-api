@@ -8,9 +8,9 @@ import {
   Put,
   Query
 } from '@nestjs/common';
-import { CreateJourneyDto } from './dto/create-journey-dto';
-import { UpdateJourneyDto } from './dto/update-journey-dto';
-import { Journey } from './interfaces/journey.interface';
+import { CreateJourneyDto } from './dto/create-journey.dto';
+import { PaginationQueryDto } from './dto/pagination-query.dto';
+import { UpdateJourneyDto } from './dto/update-journey.dto';
 import { JourneysService } from './journeys.service';
 
 @Controller('journeys')
@@ -18,13 +18,12 @@ export class JourneysController {
   constructor(private journeyService: JourneysService) {}
 
   @Get()
-  findAll(@Query() paginationQuery): Journey[] {
-    // const { limit, offset } = paginationQuery
-    return this.journeyService.findAll();
+  findAll(@Query() paginationQuery: PaginationQueryDto) {
+    return this.journeyService.findAll(paginationQuery);
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string): Journey {
+  findOne(@Param('id') id: string) {
     return this.journeyService.findOne(id);
   }
 

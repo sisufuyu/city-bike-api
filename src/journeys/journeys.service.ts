@@ -1,28 +1,37 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { Journey } from './interfaces/journey.interface';
+import { InjectModel } from '@nestjs/mongoose';
+import { Journey } from './schemas/journey.schema';
+import mongoose, { Model } from 'mongoose';
+import { CreateJourneyDto } from './dto/create-journey.dto';
+import { UpdateJourneyDto } from './dto/update-journey.dto';
+import { PaginationQueryDto } from './dto/pagination-query.dto';
 
 @Injectable()
 export class JourneysService {
-  private journeys: Journey[] = [
-    {
-      id: '6428d3e3c025e3f8bf9322f0',
-      departure: new Date('2021-05-31T20:57:25.000+00:00'),
-      return: new Date('2021-05-31T21:05:46.000+00:00'),
-      departureStationId: 94,
-      departureStationName: 'Laajalahden aukio',
-      returnStationId: 100,
-      returnStationName: 'Teljäntie',
-      coveredDistance: 2043,
-      duration: 500
-    }
-  ];
+  constructor(@InjectModel(Journey.name) private journeyModel: Model<Journey>){}
 
-  findAll() {
-    return this.journeys;
+  async findAll(paginationQuery: PaginationQueryDto) {
+    let { offset, limit } = paginationQuery;
+    console.log(offset,limit);
+
+    if(!offset) offset = 0;
+
+    if(!limit) limit = 10;
+
+    const total = await this.journeyModel.countDocuments().exec();
+
+    const results = await this.journeyModel.find({}).skip(offset).limit(limit).exec();
+
+    return {
+      total,
+      limit,
+      offset,
+      results
+    }
   }
 
-  findOne(id: string) {
-    const journey = this.journeys.find((journey) => journey.id === id);
+  async findOne(id: string): Promise<Journey> {
+    const journey = await this.journeyModel.findById(id).exec();
 
     if (!journey) {
       throw new NotFoundException(`Journey #${id} not found`);
@@ -31,24 +40,24 @@ export class JourneysService {
     return journey;
   }
 
-  create(createJourneyDTO) {
-    this.journeys.push(createJourneyDTO);
-    return createJourneyDTO;
+  async create(createJourneyDTO: CreateJourneyDto): Promise<Journey> {
+    const journey = new this.journeyModel(createJourneyDTO);
+    return journey.save();
   }
 
-  update(id: string, updateJourneyDTO) {
-    const exist = this.findOne(id);
+  async update(id: string, updateJourneyDTO: UpdateJourneyDto): Promise<Journey> {
+    const newJourney = await this.journeyModel
+      .findByIdAndUpdate(id, { $set: updateJourneyDTO }, { new: true })
+      .exec();
 
-    if (exist) {
-      //update the existing journey
+    if (!newJourney) {
+      throw new NotFoundException(`Journey #${id} not found`);
     }
+
+    return newJourney;
   }
 
-  remove(id: string) {
-    const index = this.journeys.findIndex((journey) => journey.id === id);
-
-    if (index >= 0) {
-      this.journeys.splice(index, 1);
-    }
+  async remove(id: string) {
+    return this.journeyModel.findByIdAndDelete(id).exec();
   }
 }

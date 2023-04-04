@@ -2,9 +2,15 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { JourneysModule } from './journeys/journeys.module';
+import { ConfigModule } from '@nestjs/config';
+import { MongooseModule } from '@nestjs/mongoose';
 
 @Module({
-  imports: [JourneysModule],
+  imports: [JourneysModule, ConfigModule.forRoot({
+    isGlobal: true,
+  }),
+  MongooseModule.forRoot(process.env.MONGODB_URI)
+  ],
   controllers: [AppController],
   providers: [AppService]
 })
