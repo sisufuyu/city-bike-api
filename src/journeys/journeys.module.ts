@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { JourneysController } from './journeys.controller';
-import { JourneysService } from './journeys.service';
+import { JourneysService } from './services/journeys';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Journey, JourneySchema } from './schemas/journey.schema';
 

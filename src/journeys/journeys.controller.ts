@@ -11,7 +11,7 @@ import {
 import { CreateJourneyDto } from './dto/create-journey.dto';
 import { PaginationQueryDto } from './dto/pagination-query.dto';
 import { UpdateJourneyDto } from './dto/update-journey.dto';
-import { JourneysService } from './journeys.service';
+import { JourneysService } from './services/journeys';
 
 @Controller('journeys')
 export class JourneysController {

@@ -1,10 +1,10 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Journey } from './schemas/journey.schema';
+import { Journey } from '../schemas/journey.schema';
 import mongoose, { Model } from 'mongoose';
-import { CreateJourneyDto } from './dto/create-journey.dto';
-import { UpdateJourneyDto } from './dto/update-journey.dto';
-import { PaginationQueryDto } from './dto/pagination-query.dto';
+import { CreateJourneyDto } from '../dto/create-journey.dto';
+import { UpdateJourneyDto } from '../dto/update-journey.dto';
+import { PaginationQueryDto } from '../dto/pagination-query.dto';
 
 @Injectable()
 export class JourneysService {
