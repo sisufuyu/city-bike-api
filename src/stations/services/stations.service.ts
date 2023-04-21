@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
 
@@ -18,7 +18,7 @@ export class StationsService {
 
     const total = await this.stationModel.countDocuments().exec();
 
-    const results = await this.stationModel.find().skip(offset).limit(limit).exec();
+    const results = await this.stationModel.find().sort({ id: 1 }).skip(offset).limit(limit).exec();
 
     return {
       total,
@@ -26,5 +26,15 @@ export class StationsService {
       offset,
       results
     }
+  }
+
+  async findOne(id: string): Promise<Station> {
+    const station = await this.stationModel.findById(id).exec();
+
+    if (!station) {
+      throw new NotFoundException(`Station #${id} not found`);
+    }
+
+    return station;
   }
 }
