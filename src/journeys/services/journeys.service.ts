@@ -1,18 +1,18 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, NotFoundException, BadRequestException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Journey } from '../schemas/journey.schema';
-import mongoose, { Model } from 'mongoose';
-import { CreateJourneyDto } from '../dto/create-journey.dto';
-import { UpdateJourneyDto } from '../dto/update-journey.dto';
-import { PaginationQueryDto } from '../dto/pagination-query.dto';
+import { Model } from 'mongoose';
+import { CreateJourneyDto } from '../dtos/create-journey.dto';
+import { UpdateJourneyDto } from '../dtos/update-journey.dto';
+import { PaginationQueryDto } from '../../dtos/pagination-query.dto';
+import { ReturnJourneyDTO } from '../dtos/return-journey.dto';
 
 @Injectable()
 export class JourneysService {
   constructor(@InjectModel(Journey.name) private journeyModel: Model<Journey>){}
 
-  async findAll(paginationQuery: PaginationQueryDto) {
+  async findAll(paginationQuery: PaginationQueryDto): Promise<ReturnJourneyDTO> {
     let { offset, limit } = paginationQuery;
-    console.log(offset,limit);
 
     if(!offset) offset = 0;
 
