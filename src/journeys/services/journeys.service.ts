@@ -60,4 +60,19 @@ export class JourneysService {
   async remove(id: string) {
     return this.journeyModel.findByIdAndDelete(id).exec();
   }
+
+  async countByDepartureStation(id: number) {
+    return this.journeyModel
+      .find({ departureStationId: id })
+      .countDocuments()
+      .exec();
+  }
+
+  async countByReturnStation(id: number) {
+    return this.journeyModel
+      .find({ returnStationId: id })
+      .countDocuments()
+      .exec();
+  }
+
 }

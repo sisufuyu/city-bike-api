@@ -7,6 +7,7 @@ import { Journey, JourneySchema } from './schemas/journey.schema';
 @Module({ 
   imports: [MongooseModule.forFeature([{ name: Journey.name, schema: JourneySchema }])],
   controllers: [JourneysController], 
-  providers: [JourneysService] 
+  providers: [JourneysService],
+  exports: [JourneysService] 
 })
 export class JourneysModule {}

@@ -4,11 +4,15 @@ import { InjectModel } from '@nestjs/mongoose';
 
 import { Station } from '../schemas/station.schema';
 import { PaginationQueryDto } from 'src/dtos/pagination-query.dto';
-import { ReturnStationDTO } from '../dtos/return-station.dto';
+import { ReturnStationDTO, StationWIthJourneyInfo } from '../dtos/return-station.dto';
+import { JourneysService } from '../../journeys/services/journeys.service';
 
 @Injectable()
 export class StationsService {
-  constructor(@InjectModel(Station.name) private stationModel: Model<Station>) {}
+  constructor(
+    @InjectModel(Station.name) private stationModel: Model<Station>,
+    private journeysService: JourneysService
+  ) {}
 
   async findAll(paginationQuery: PaginationQueryDto): Promise<ReturnStationDTO> {
     let { limit, offset } = paginationQuery;
@@ -28,13 +32,21 @@ export class StationsService {
     }
   }
 
-  async findOne(id: string): Promise<Station> {
+  async findOne(id: string) {
     const station = await this.stationModel.findById(id).exec();
 
     if (!station) {
       throw new NotFoundException(`Station #${id} not found`);
     }
 
-    return station;
+    const departureFrom = await this.journeysService.countByDepartureStation(station.id);
+
+    const returnTo = await this.journeysService.countByReturnStation(station.id);
+
+    return {
+      ...station.toJSON(),
+      departureFrom,
+      returnTo
+    }
   }
 }
