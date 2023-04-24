@@ -6,8 +6,3 @@ export interface ReturnStationDTO {
   offset: number;
   results: Station[];
 }
-
-export class StationWIthJourneyInfo extends Station {
-  departureFrom: number;
-  returnTo: number;
-}

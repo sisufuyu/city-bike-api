@@ -61,18 +61,11 @@ export class JourneysService {
     return this.journeyModel.findByIdAndDelete(id).exec();
   }
 
-  async countByDepartureStation(id: number) {
-    return this.journeyModel
-      .find({ departureStationId: id })
-      .countDocuments()
-      .exec();
+  async findByDepartureStation(id: number): Promise<Journey[]> {
+    return this.journeyModel.find({ departureStationId: id }).exec();
   }
 
-  async countByReturnStation(id: number) {
-    return this.journeyModel
-      .find({ returnStationId: id })
-      .countDocuments()
-      .exec();
+  async findByReturnStation(id: number): Promise<Journey[]> {
+    return this.journeyModel.find({ returnStationId: id }).exec();
   }
-
 }
