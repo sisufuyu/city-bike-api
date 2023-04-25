@@ -58,7 +58,9 @@ export class JourneysService {
   }
 
   async remove(id: string) {
-    return this.journeyModel.findByIdAndDelete(id).exec();
+    const journey = await this.findOne(id);
+    return journey.deleteOne();
+    //return this.journeyModel.findByIdAndDelete(id).exec();
   }
 
   async findByDepartureStation(id: number): Promise<Journey[]> {

@@ -3,10 +3,10 @@ import { Document } from "mongoose";
 
 @Schema()
 export class Station extends Document{
-  @Prop({ required: true })
+  @Prop({ required: true, index: true })
   id: number;
 
-  @Prop({ required: true })
+  @Prop({ required: true, index: true })
   name: string;
 
   @Prop({ required: true })
@@ -26,4 +26,4 @@ export class Station extends Document{
 }
 
 export const StationSchema = SchemaFactory.createForClass(Station)
-StationSchema.index({ name: 1 })
+StationSchema.index({ id: 1, name: 1 })

@@ -24,7 +24,7 @@ export class Journey extends Document {
   @Prop({ required: true })
   coveredDistance: number;
 
-  @Prop({ required: true })
+  @Prop()
   duration: number;
 }
 

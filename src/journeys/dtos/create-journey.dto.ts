@@ -1,30 +1,28 @@
-import { IsString, IsDate, IsInt, IsNumber } from 'class-validator';
+import { IsString, IsDate, IsInt, Min } from 'class-validator';
 import { Type } from 'class-transformer';
 
 export class CreateJourneyDto {
-  @IsDate()
+  @IsDate({ message: 'Departure time is not valid Date' })
   @Type(() => Date)
   readonly departure: Date;
 
-  @IsDate()
+  @IsDate({ message: 'Return time is not valid Date' })
   @Type(() => Date)
   readonly return: Date;
 
   @IsInt()
+  @Min(1)
   readonly departureStationId: number;
 
-  @IsString()
   readonly departureStationName: string;
 
   @IsInt()
+  @Min(1)
   readonly returnStationId: number;
 
-  @IsString()
   readonly returnStationName: string;
 
-  @IsNumber()
+  @IsInt()
+  @Min(10, { message: 'Covered distance is too short' })
   readonly coveredDistance: number;
-
-  @IsNumber()
-  readonly duration: number;
 }

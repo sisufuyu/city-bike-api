@@ -38,4 +38,14 @@ export class StationsService {
     
     return station
   }
+
+  async findByID(ID: number): Promise<Station> {
+    const station = await this.stationModel.findOne({ id: ID }).exec();
+
+    if (!station) {
+      throw new NotFoundException(`Station with ID #${ID} not found`);
+    }
+    
+    return station
+  }
 }
