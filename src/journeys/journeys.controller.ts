@@ -20,13 +20,13 @@ export class JourneysController {
   constructor(private journeyService: JourneysService, private stationService: StationsService) {}
 
   @Get()
-  findAll(@Query() paginationQuery: PaginationQueryDto) {
-    return this.journeyService.findAll(paginationQuery);
+  async findAll(@Query() paginationQuery: PaginationQueryDto) {
+    return await this.journeyService.findAll(paginationQuery);
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.journeyService.findOne(id);
+  async findOne(@Param('id') id: string) {
+    return await this.journeyService.findOne(id);
   }
 
   @Post()
@@ -38,7 +38,9 @@ export class JourneysController {
       throw new BadRequestException('Return time should not be early than departure time');
     } 
 
-    if ((returnTime - departureTime)/1000 < 10) {
+    const duration = (returnTime - departureTime)/1000;
+
+    if (duration < 10) {
       throw new BadRequestException('The trip is too short, should be longer than 10 seconds');
     }
 
@@ -54,19 +56,20 @@ export class JourneysController {
       ...createJourneyDto, 
       departureStationName, 
       returnStationName,
+      duration,
     });
   }
 
   @Put(':id')
-  update(
+  async update(
     @Param('id') id: string,
     @Body() updateJourneyDtoDto: UpdateJourneyDto
   ) {
-    return this.journeyService.update(id, updateJourneyDtoDto);
+    return await this.journeyService.update(id, updateJourneyDtoDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.journeyService.remove(id);
+  async remove(@Param('id') id: string) {
+    return await this.journeyService.remove(id);
   }
 }

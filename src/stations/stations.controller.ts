@@ -1,16 +1,17 @@
-import { Controller, Get, Param, Query } from '@nestjs/common';
+import { Body, Controller, Get, Param, Query, Post, Delete } from '@nestjs/common';
 
 import { StationsService } from './services/stations.service';
 import { PaginationQueryDto } from 'src/dtos/pagination-query.dto';
 import { JourneysService } from '../journeys/services/journeys.service';
 import { countAvg } from 'src/utils/helper.util';
+import { CreateStationDTO } from './dtos/create-station.dto';
 
 @Controller('stations')
 export class StationsController {
   constructor(private stationService: StationsService, private journeysService: JourneysService) {}
 
   @Get()
-  findAll(@Query() paginationQuery: PaginationQueryDto) {
+  async findAll(@Query() paginationQuery: PaginationQueryDto) {
     return this.stationService.findAll(paginationQuery);
   }
 
@@ -31,5 +32,15 @@ export class StationsController {
       departureFrom,
       returnTo,
     }
+  }
+
+  @Post()
+  async create(@Body() createStationDTO: CreateStationDTO) {
+    return await this.stationService.create(createStationDTO);
+  }
+
+  @Delete(':id')
+  async remove(@Param('id') id: string) {
+    return await this.stationService.remove(id);
   }
 }

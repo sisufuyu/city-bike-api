@@ -1,4 +1,4 @@
-import { IsString, IsDate, IsInt, Min } from 'class-validator';
+import { IsDate, IsInt, Min } from 'class-validator';
 import { Type } from 'class-transformer';
 
 export class CreateJourneyDto {
@@ -25,4 +25,6 @@ export class CreateJourneyDto {
   @IsInt()
   @Min(10, { message: 'Covered distance is too short' })
   readonly coveredDistance: number;
+
+  readonly duration: number;
 }

@@ -3,19 +3,19 @@ import { Document } from "mongoose";
 
 @Schema()
 export class Journey extends Document {
-  @Prop({ required: true })
+  @Prop({ required: true, index: true })
   departure: Date;
 
   @Prop({ required: true })
   return: Date;
 
-  @Prop({ required: true })
+  @Prop({ required: true, index: true })
   departureStationId: number;
 
   @Prop({ required: true })
   departureStationName: string;
 
-  @Prop({ required: true })
+  @Prop({ required: true, index: true })
   returnStationId: number;
 
   @Prop({ required: true })
@@ -29,4 +29,3 @@ export class Journey extends Document {
 }
 
 export const JourneySchema = SchemaFactory.createForClass(Journey);
-JourneySchema.index({ departure: 1 })
