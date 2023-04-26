@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException, BadRequestException } from '@nestjs/common';
+import {
+  Injectable,
+  NotFoundException,
+  BadRequestException
+} from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Journey } from '../schemas/journey.schema';
 import { Model } from 'mongoose';
@@ -9,26 +13,34 @@ import { ReturnJourneyDTO } from '../dtos/return-journey.dto';
 
 @Injectable()
 export class JourneysService {
-  constructor(@InjectModel(Journey.name) private journeyModel: Model<Journey>){}
+  constructor(
+    @InjectModel(Journey.name) private journeyModel: Model<Journey>
+  ) {}
 
-  async findAll(paginationQuery: PaginationQueryDto): Promise<ReturnJourneyDTO> {
+  async findAll(
+    paginationQuery: PaginationQueryDto
+  ): Promise<ReturnJourneyDTO> {
     try {
       let { offset, limit } = paginationQuery;
 
-      if(!offset) offset = 0;
+      if (!offset) offset = 0;
 
-      if(!limit) limit = 10;
+      if (!limit) limit = 10;
 
       const total = await this.journeyModel.countDocuments().exec();
 
-      const results = await this.journeyModel.find({}).skip(offset).limit(limit).exec();
+      const results = await this.journeyModel
+        .find({})
+        .skip(offset)
+        .limit(limit)
+        .exec();
 
       return {
         total,
         limit,
         offset,
-        results,
-      }
+        results
+      };
     } catch (err) {
       throw new BadRequestException('Find journeys failed');
     }
@@ -53,16 +65,18 @@ export class JourneysService {
       const journey = new this.journeyModel(createJourneyDTO);
       return await journey.save();
     } catch (err) {
-      throw new BadRequestException('Create new journey failed')
+      throw new BadRequestException('Create new journey failed');
     }
   }
 
-  async update(id: string, updateJourneyDTO: UpdateJourneyDto): Promise<Journey> {
+  async update(
+    id: string,
+    updateJourneyDTO: UpdateJourneyDto
+  ): Promise<Journey> {
     try {
       return await this.journeyModel
-      .findByIdAndUpdate(id, { $set: updateJourneyDTO }, { new: true })
-      .exec();
-
+        .findByIdAndUpdate(id, { $set: updateJourneyDTO }, { new: true })
+        .exec();
     } catch (err) {
       throw new NotFoundException(`Journey #${id} not found`);
     }
@@ -86,7 +100,9 @@ export class JourneysService {
     try {
       return await this.journeyModel.find({ departureStationId: id }).exec();
     } catch (err) {
-      throw new BadRequestException(`Find journey with departure station #${id} failed`);
+      throw new BadRequestException(
+        `Find journey with departure station #${id} failed`
+      );
     }
   }
 
@@ -94,7 +110,9 @@ export class JourneysService {
     try {
       return await this.journeyModel.find({ returnStationId: id }).exec();
     } catch (err) {
-      throw new BadRequestException(`Find journey with return station #${id} failed`);
+      throw new BadRequestException(
+        `Find journey with return station #${id} failed`
+      );
     }
   }
 }

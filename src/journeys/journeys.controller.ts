@@ -7,7 +7,7 @@ import {
   Post,
   Put,
   Query,
-  BadRequestException,
+  BadRequestException
 } from '@nestjs/common';
 import { CreateJourneyDto } from './dtos/create-journey.dto';
 import { PaginationQueryDto } from '../dtos/pagination-query.dto';
@@ -17,7 +17,10 @@ import { StationsService } from 'src/stations/services/stations.service';
 
 @Controller('journeys')
 export class JourneysController {
-  constructor(private journeyService: JourneysService, private stationService: StationsService) {}
+  constructor(
+    private journeyService: JourneysService,
+    private stationService: StationsService
+  ) {}
 
   @Get()
   async findAll(@Query() paginationQuery: PaginationQueryDto) {
@@ -35,28 +38,34 @@ export class JourneysController {
     const returnTime = createJourneyDto.return.valueOf();
 
     if (returnTime < departureTime) {
-      throw new BadRequestException('Return time should not be early than departure time');
-    } 
-
-    const duration = (returnTime - departureTime)/1000;
-
-    if (duration < 10) {
-      throw new BadRequestException('The trip is too short, should be longer than 10 seconds');
+      throw new BadRequestException(
+        'Return time should not be early than departure time'
+      );
     }
 
-    const departureStationId = createJourneyDto.departureStationId;    
-    const departureStation = await this.stationService.findByID(departureStationId);
+    const duration = (returnTime - departureTime) / 1000;
+
+    if (duration < 10) {
+      throw new BadRequestException(
+        'The trip is too short, should be longer than 10 seconds'
+      );
+    }
+
+    const departureStationId = createJourneyDto.departureStationId;
+    const departureStation = await this.stationService.findByID(
+      departureStationId
+    );
     const departureStationName = departureStation.name;
 
     const returnStationId = createJourneyDto.returnStationId;
     const returnStation = await this.stationService.findByID(returnStationId);
     const returnStationName = returnStation.name;
 
-    return this.journeyService.create({ 
-      ...createJourneyDto, 
-      departureStationName, 
+    return this.journeyService.create({
+      ...createJourneyDto,
+      departureStationName,
       returnStationName,
-      duration,
+      duration
     });
   }
 

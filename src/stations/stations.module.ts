@@ -6,9 +6,12 @@ import { StationSchema, Station } from './schemas/station.schema';
 import { JourneysModule } from '../journeys/journeys.module';
 
 @Module({
-  imports: [MongooseModule.forFeature([{ name: Station.name, schema: StationSchema }]), forwardRef(() => JourneysModule)],
+  imports: [
+    MongooseModule.forFeature([{ name: Station.name, schema: StationSchema }]),
+    forwardRef(() => JourneysModule)
+  ],
   controllers: [StationsController],
   providers: [StationsService],
-  exports: [StationsService],
+  exports: [StationsService]
 })
 export class StationsModule {}

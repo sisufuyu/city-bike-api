@@ -8,10 +8,10 @@ import { StationsModule } from './stations/stations.module';
 
 @Module({
   imports: [
-    JourneysModule, 
-    ConfigModule.forRoot({ isGlobal: true, }),
+    JourneysModule,
+    ConfigModule.forRoot({ isGlobal: true }),
     MongooseModule.forRoot(process.env.MONGODB_URI),
-    StationsModule,
+    StationsModule
   ],
   controllers: [AppController],
   providers: [AppService]
