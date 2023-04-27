@@ -3,7 +3,7 @@ import {
   Injectable,
   NotFoundException
 } from '@nestjs/common';
-import { Model } from 'mongoose';
+import { Model, Error } from 'mongoose';
 import { MongoServerError } from 'mongodb';
 import { InjectModel } from '@nestjs/mongoose';
 import { Station } from '../schemas/station.schema';
@@ -56,6 +56,10 @@ export class StationsService {
 
       return station;
     } catch (err) {
+      if (err instanceof Error.CastError) {
+        throw new BadRequestException(`Station id #${id} is not valid`);
+      }
+
       throw new NotFoundException(`Station #${id} not found`);
     }
   }
@@ -81,7 +85,9 @@ export class StationsService {
     } catch (err) {
       if (err instanceof MongoServerError) {
         if (err.code === 11000) {
-          throw new BadRequestException(`Station ID cannot be duplicate`);
+          throw new BadRequestException(
+            `Station ID ${createStationDTO.id} already exists`
+          );
         }
       }
       throw new BadRequestException('Create new station failed');
@@ -98,6 +104,10 @@ export class StationsService {
 
       return station;
     } catch (err) {
+      if (err instanceof Error.CastError) {
+        throw new BadRequestException(`Station id #${id} is not valid`);
+      }
+
       throw new NotFoundException(`Station #${id} not found`);
     }
   }

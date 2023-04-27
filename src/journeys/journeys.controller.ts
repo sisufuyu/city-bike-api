@@ -5,13 +5,11 @@ import {
   Get,
   Param,
   Post,
-  Put,
   Query,
   BadRequestException
 } from '@nestjs/common';
 import { CreateJourneyDto } from './dtos/create-journey.dto';
 import { PaginationQueryDto } from '../dtos/pagination-query.dto';
-import { UpdateJourneyDto } from './dtos/update-journey.dto';
 import { JourneysService } from './services/journeys.service';
 import { StationsService } from 'src/stations/services/stations.service';
 
@@ -67,14 +65,6 @@ export class JourneysController {
       returnStationName,
       duration
     });
-  }
-
-  @Put(':id')
-  async update(
-    @Param('id') id: string,
-    @Body() updateJourneyDtoDto: UpdateJourneyDto
-  ) {
-    return await this.journeyService.update(id, updateJourneyDtoDto);
   }
 
   @Delete(':id')

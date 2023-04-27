@@ -5,9 +5,8 @@ import {
 } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Journey } from '../schemas/journey.schema';
-import { Model } from 'mongoose';
+import { Model, Error } from 'mongoose';
 import { CreateJourneyDto } from '../dtos/create-journey.dto';
-import { UpdateJourneyDto } from '../dtos/update-journey.dto';
 import { PaginationQueryDto } from '../../dtos/pagination-query.dto';
 import { ReturnJourneyDTO } from '../dtos/return-journey.dto';
 
@@ -56,6 +55,10 @@ export class JourneysService {
 
       return journey;
     } catch (err) {
+      if (err instanceof Error.CastError) {
+        throw new BadRequestException(`Journey id #${id} is not valid`);
+      }
+
       throw new NotFoundException(`Journey #${id} not found`);
     }
   }
@@ -69,19 +72,6 @@ export class JourneysService {
     }
   }
 
-  async update(
-    id: string,
-    updateJourneyDTO: UpdateJourneyDto
-  ): Promise<Journey> {
-    try {
-      return await this.journeyModel
-        .findByIdAndUpdate(id, { $set: updateJourneyDTO }, { new: true })
-        .exec();
-    } catch (err) {
-      throw new NotFoundException(`Journey #${id} not found`);
-    }
-  }
-
   async remove(id: string): Promise<Journey> {
     try {
       const journey = await this.journeyModel.findByIdAndDelete(id).exec();
@@ -92,6 +82,10 @@ export class JourneysService {
 
       return journey;
     } catch (err) {
+      if (err instanceof Error.CastError) {
+        throw new BadRequestException(`Journey id #${id} is not valid`);
+      }
+
       throw new NotFoundException(`Journey #${id} not found`);
     }
   }
