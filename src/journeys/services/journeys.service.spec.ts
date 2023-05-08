@@ -60,6 +60,7 @@ describe('JourneysService', () => {
 
   afterEach(async () => {
     await mongoose.disconnect();
+    await mongod.stop();
   });
 
   it('should be defined', () => {
@@ -112,5 +113,11 @@ describe('JourneysService', () => {
   it('should find journeys by return station ID', async () => {
     const journeys = await service.findByReturnStation(511);
     expect(journeys).toHaveLength(2);
+  });
+
+  it('should return a journey', async () => {
+    const journey = await service.findOne(journey2._id);
+
+    expect(journey).toHaveProperty('_id', journey2._id);
   });
 });
