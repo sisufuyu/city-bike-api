@@ -24,6 +24,7 @@ module.exports = {
     'keyword-spacing': ['error', { 
       'after': true,
       'before': true
-    }]
+    }],
+    'semi': ['error', 'always']
   },
 };
