@@ -3,7 +3,7 @@ import { JourneysController } from './journeys.controller';
 import { JourneysService } from './services/journeys.service';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Journey, JourneySchema } from './schemas/journey.schema';
-import { StationsModule } from 'src/stations/stations.module';
+import { StationsModule } from '../stations/stations.module';
 
 @Module({
   imports: [

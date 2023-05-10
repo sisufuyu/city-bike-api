@@ -9,9 +9,9 @@ import {
 } from '@nestjs/common';
 
 import { StationsService } from './services/stations.service';
-import { PaginationQueryDto } from 'src/dtos/pagination-query.dto';
+import { PaginationQueryDto } from '../dtos/pagination-query.dto';
 import { JourneysService } from '../journeys/services/journeys.service';
-import { countAvg } from 'src/utils/helper.util';
+import { countAvg } from '../utils/helper.util';
 import { CreateStationDTO } from './dtos/create-station.dto';
 
 @Controller('stations')
