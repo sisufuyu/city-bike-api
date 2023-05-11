@@ -6,37 +6,7 @@ import mongoose from 'mongoose';
 import { MongoMemoryServer } from 'mongodb-memory-server';
 import { StationsModule } from '../../src/stations/stations.module';
 import { Station } from '../../src/stations/schemas/station.schema';
-
-const stations = [
-  {
-    id: 1,
-    name: "Kaivopuisto",
-    address: "Meritori 1",
-    city: "",
-    capacities: 30,
-    x: 24.95021147,
-    y: 60.15536962, 
-  },
-  {
-    id: 2,
-    name: "Laivasillankatu",
-    address: "Laivasillankatu 14",
-    city: "",
-    capacities: 12,
-    x: 24.95650977,
-    y: 60.16098907,
-  },
-]
-
-const station = {
-  id: 6,
-  name: "Ahertajantie",
-  address: "Ahertajantie 5",
-  city: "Espoo",
-  capacities: 14,
-  x: 24.805100018876264,
-  y: 60.18093310527152, 
-}
+import { stations, station } from '../data';
 
 describe('Station', () => {
   let app: INestApplication;

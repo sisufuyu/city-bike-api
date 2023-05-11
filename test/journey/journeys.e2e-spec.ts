@@ -7,52 +7,7 @@ import { MongoMemoryServer } from 'mongodb-memory-server';
 import { JourneysModule } from '../../src/journeys/journeys.module';
 import { Journey } from '../../src/journeys/schemas/journey.schema';
 import { StationsService } from '../../src/stations/services/stations.service';
-
-const stations = [
-  {
-    id: 1,
-    name: "Kaivopuisto",
-    address: "Meritori 1",
-    city: "",
-    capacities: 30,
-    x: 24.95021147,
-    y: 60.15536962, 
-  },
-  {
-    id: 2,
-    name: "Laivasillankatu",
-    address: "Laivasillankatu 14",
-    city: "",
-    capacities: 12,
-    x: 24.95650977,
-    y: 60.16098907,
-  },
-]
-
-const journeys = [
-  {
-    departure: new Date('2021-05-01T17:31:10.000Z'),
-    return: new Date('2021-05-01T18:35:18.000Z'),
-    departureStationId: 1,
-    returnStationId: 2,
-    coveredDistance: 618,
-  },
-  {
-    departure: new Date('2021-05-30T20:30:45.000+00:00'),
-    return: new Date('2021-05-31T12:45:49.000+00:00'),
-    departureStationId: 2,
-    returnStationId: 1,
-    coveredDistance: 1000,
-  }
-];
-
-const journey = {
-  departure: new Date("2021-05-31T20:56:11.000Z"),
-  return: new Date("2021-05-31T21:02:02.000Z"),
-  departureStationId: 1,
-  returnStationId: 2,
-  coveredDistance: 800,
-};
+import { stations, journeys, journey } from '../data';
 
 describe('Journeys', () => {
   let app: INestApplication;
