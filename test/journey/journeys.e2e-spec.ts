@@ -79,9 +79,8 @@ describe('Journeys', () => {
 
   describe('GET /journeys/:id', () => {
     it('find a journey successfully if exists', () => {
-      const id = newJourney._id;
       return request(app.getHttpServer())
-        .get(`/journeys/${id}`)
+        .get('/journeys/645527f5a2afa3ac60a6caf4')
         .expect(200);
     });
 
