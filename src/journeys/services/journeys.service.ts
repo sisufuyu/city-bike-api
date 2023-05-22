@@ -109,4 +109,14 @@ export class JourneysService {
       );
     }
   }
+
+  async deleteMany() {
+    try {
+      await this.journeyModel.deleteMany({});
+    } catch (err) {
+      throw new BadRequestException(
+        `Delete journeys failed`
+      );
+    }
+  }
 }

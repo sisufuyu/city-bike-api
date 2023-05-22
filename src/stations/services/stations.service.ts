@@ -111,4 +111,14 @@ export class StationsService {
       throw new NotFoundException(`Station #${id} not found`);
     }
   }
+
+  async deleteMany() {
+    try {
+      await this.stationModel.deleteMany({});
+    } catch (err) {
+      throw new BadRequestException(
+        `Delete stations failed`
+      );
+    }
+  }
 }

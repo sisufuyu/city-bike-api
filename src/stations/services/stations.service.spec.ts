@@ -63,6 +63,7 @@ describe('StationsService', () => {
 
   it('should return stations with pagination info', async () => {
     const stations = await service.findAll({offset: 0, limit: 10});
+
     expect(stations).toHaveProperty('total', 2);
     expect(stations.results[0]).toHaveProperty('id', station1.id);
     expect(stations.results[1]).toHaveProperty('id', station2.id);
@@ -103,4 +104,11 @@ describe('StationsService', () => {
     expect(station).toHaveProperty('id', station1.id);
     expect(station).toHaveProperty('name', station1.name);
   });
+
+  it('should delete all stations', async () => {
+    await service.deleteMany();
+
+    const stations = await service.findAll({offset: 0, limit: 10});
+    expect(stations).toHaveProperty('total', 0);
+  })
 });

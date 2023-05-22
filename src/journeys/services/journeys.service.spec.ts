@@ -120,4 +120,11 @@ describe('JourneysService', () => {
 
     expect(journey).toHaveProperty('_id', journey2._id);
   });
+
+  it('should delete all journeys', async () => {
+    await service.deleteMany();
+
+    const journeys = await service.findAll({ limit: 10, offset: 0 });
+    expect(journeys).toHaveProperty('total', 0);
+  });
 });
