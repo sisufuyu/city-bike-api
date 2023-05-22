@@ -1,7 +1,6 @@
 # Helsinki City Bike API
 
 This is a REST API for Helsinki city bike. This project is for [Solita Dev Academy pre-assignment](https://github.com/solita/dev-academy-2023-exercise).
-I created a server implementation in the [] repository.
 
 ## Built With
 
