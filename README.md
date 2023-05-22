@@ -1,32 +1,37 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
-
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
-
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+# Helsinki City Bike Api
 
 ## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+This is a REST API for Helsinki city bike. This project is for [Solita Dev Academy pre-assignment](https://github.com/solita/dev-academy-2023-exercise).
+
+## Built With
+
+This project is built with following technologies:
+* [Nest.js](https://nestjs.com/)
+* [MongoDB](https://www.mongodb.com/)
+
+## Prerequisites
+
+To run the project on your local environment, Please make sure that Node.js (version >= 12, except for v13) is installed on your operating system.
+
+## Data Import
+
+There are many ways to import data in MongoDB, and I use MongoDB Compass for this puerpose. 
+1. Create a database with name 'helsinki-city-bike-app', https://www.mongodb.com/basics/create-database
+2. Create two collections 'journeys' and 'stations' in the database.
+3. [Download and install MongoDB Compass](https://www.mongodb.com/docs/compass/master/install/?_ga=2.239545610.828859960.1684698811-745070963.1679086569&_gac=1.258739832.1684761270.CjwKCAjwpayjBhAnEiwA-7ena6WR8oZ9nKF3443BeDyPspH4lc_IhzG8P4hl2fcriAVC_aBjowyPyRoCdrYQAvD_BwE)
+4. Connect to MongoDB, https://www.mongodb.com/docs/compass/master/connect/
+5. Import Data, https://www.mongodb.com/docs/compass/current/import-export/
 
 ## Installation
+
+1. Clone the repo
+2. Create .env file in your root directory
+```
+MONGODB_URI=mongodb+srv://<your username>:<your password>@cluster0.sk6lf.mongodb.net/<database name>
+MONGODB_TEST_URI=mongodb+srv://<your username>:<your password>@cluster0.sk6lf.mongodb.net/<test database name>
+```
+3. Install NPM packages
 
 ```bash
 $ npm install
@@ -57,17 +62,3 @@ $ npm run test:e2e
 # test coverage
 $ npm run test:cov
 ```
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
