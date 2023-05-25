@@ -13,7 +13,30 @@ This project is built with following technologies:
 
 To run the project on your local environment, Please make sure that Node.js (version >= 12, except for v13) is installed on your operating system.
 
-## Data Import
+## Data Preparation
+
+### Dataset Testing
+The original journeys data are *2021-05.csv*, *2021-06.csv*, *2021-07.csv*, and the original stations data are *Helsinki-bike-stations.csv*, all of them are under *data* folder. 
+* validJourney.js file: a journey validation function
+```
+validateJourney(row: Journey) => boolean
+```
+    * It should reject a journey where departure time is not a parseable DateTime (and the same for an arrival time)
+    * It should reject a journey where arrival happens before departure
+    * It should reject if a departure station id is not a positive integer (and the same with arrival and length of the trip)
+    * It should accept a valid trip
+    * It should reject a trip that is less than 10 seconds (this came from the pre-assignment)
+* filterJourneys.js file: a filterJourneys function which filters the journeys data
+* validStation.js file: a station validation function
+```
+validateStation(row: Station) => boolean
+``` 
+    * It should reject if station id is not a positive integer
+    * It should reject if station x is not in the range bewteen -180 ~ 180
+    * It should reject if station y is not in the range bewteen -90 ~ 90
+* filterStations.js file: a filterStations function which filters the stations data
+
+### Data Import
 
 There are many ways to import data in MongoDB, and I use MongoDB Compass for this puerpose. 
 1. Create a database with name 'helsinki-city-bike-app', https://www.mongodb.com/basics/create-database
