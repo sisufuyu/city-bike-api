@@ -31,6 +31,11 @@ The original journeys data are ***2021-05.csv***, ***2021-06.csv***, ***2021-07.
    * It should reject if station y is not in the range bewteen -90 ~ 90
 * filterStations.js file: a filterStations function which filters the stations data
 
+To test and filter dataset, run:
+```
+npm run data/index.js
+```
+
 ### Data Import
 
 There are many ways to import data in MongoDB, and I use MongoDB Compass for this purpose. 
