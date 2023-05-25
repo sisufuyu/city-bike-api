@@ -30,6 +30,8 @@
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.0",
     "cross-env": "^7.0.3",
+    "csv-parse": "^5.3.10",
+    "fast-csv": "^4.3.6",
     "mongodb": "^5.4.0",
     "mongodb-memory-server": "^8.12.2",
     "mongoose": "^7.0.3",
@@ -77,5 +79,6 @@
     ],
     "coverageDirectory": "../coverage",
     "testEnvironment": "node"
-  }
+  },
+  "type": "module"
 }
