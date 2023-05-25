@@ -1,16 +1,16 @@
-import { createReadStream, createWriteStream } from 'fs';
-import * as csv from 'fast-csv';
-import validJourney from './validJourney.js';
+const fs = require('fs');
+const csv = require('@fast-csv/parse');
+const validJourney = require('./validJourney.js');
 
 const filterJourneys = (inputFile, outputFile) => {
-  const writeStream = createWriteStream(outputFile, { flags : 'w', encoding: 'utf8' });
+  const writeStream = fs.createWriteStream(outputFile, { flags : 'w', encoding: 'utf8' });
 
   const header = 'departure,return,departureStationId,departureStationName,returnStationId,returnStationName,coveredDistance,duration\n';
   writeStream.write(header);
 
   const parser = csv.parse({ headers: true });
 
-  createReadStream(inputFile)
+  fs.createReadStream(inputFile)
     .pipe(parser)
     .on('data', row => {
       const valid = validJourney(row);
@@ -39,4 +39,4 @@ const filterJourneys = (inputFile, outputFile) => {
     });
 }
 
-export default filterJourneys;
+module.exports = filterJourneys;

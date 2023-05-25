@@ -40,4 +40,4 @@ const validJourney = (row) => {
   return valid;
 }
 
-export default validJourney;
+module.exports = validJourney;

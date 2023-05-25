@@ -1,16 +1,16 @@
-import { createWriteStream, createReadStream } from 'fs';
-import * as csv from 'fast-csv';
-import validStation from './validStation.js';
+const fs = require('fs');
+const csv = require('fast-csv');
+const validStation = require('./validStation.js');
 
 const filterStations = async (inputFile, outputFile) => {
-  const writeStream = createWriteStream(outputFile, { flags : 'w', encoding: 'utf8' });
+  const writeStream = fs.createWriteStream(outputFile, { flags : 'w', encoding: 'utf8' });
   const header = 'id,name,address,city,capacities,x,y\n';
   
   writeStream.write(header);
 
   const parser = csv.parse({ headers: true });
 
-  createReadStream(inputFile)
+  fs.createReadStream(inputFile)
     .pipe(parser)
     .on('data', function(row) {
       const valid = validStation(row);
@@ -39,4 +39,4 @@ const filterStations = async (inputFile, outputFile) => {
     });
 }
 
-export default filterStations;
+module.exports = filterStations;

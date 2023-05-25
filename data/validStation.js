@@ -28,4 +28,4 @@ const validStation = (row) => {
   return valid;
 }
 
-export default validStation;
+module.exports = validStation;
