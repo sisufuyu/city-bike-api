@@ -16,7 +16,7 @@ To run the project on your local environment, Please make sure that Node.js (ver
 ## Data Preparation
 
 ### Dataset Testing
-The original journeys data are *2021-05.csv*, *2021-06.csv*, *2021-07.csv*, and the original stations data are *Helsinki-bike-stations.csv*, all of them are under *data* folder. 
+The original journeys data are ***2021-05.csv***, ***2021-06.csv***, ***2021-07.csv***, and the original stations data are ***Helsinki-bike-stations.csv***, all of them are under ***data*** folder. 
 * validJourney.js file: a journey validation function
    * It should reject a journey where departure time is not a parseable DateTime (and the same for an arrival time)
    * It should reject a journey where arrival happens before departure
