@@ -33,7 +33,7 @@ The original journeys data are ***2021-05.csv***, ***2021-06.csv***, ***2021-07.
 
 ### Data Import
 
-There are many ways to import data in MongoDB, and I use MongoDB Compass for this puerpose. 
+There are many ways to import data in MongoDB, and I use MongoDB Compass for this purpose. 
 1. Create a database with name 'helsinki-city-bike-app', https://www.mongodb.com/basics/create-database
 2. Create two collections 'journeys' and 'stations' in the database.
 3. [Download and install MongoDB Compass](https://www.mongodb.com/docs/compass/master/install/?_ga=2.239545610.828859960.1684698811-745070963.1679086569&_gac=1.258739832.1684761270.CjwKCAjwpayjBhAnEiwA-7ena6WR8oZ9nKF3443BeDyPspH4lc_IhzG8P4hl2fcriAVC_aBjowyPyRoCdrYQAvD_BwE)
