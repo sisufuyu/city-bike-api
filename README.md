@@ -26,15 +26,14 @@ All of them are under ***data*** folder.
    * It should reject if a departure station id is not a positive integer (and the same with arrival and length of the trip)
    * It should accept a valid trip
    * It should reject a trip that is less than 10 seconds (this came from the pre-assignment)
-    
-* filterJourneys.js file: a filterJourneys function which filters the journeys data
+* filterJourneys.js file: a filterJourneys function which filters the journeys data and returns validated journeys data
 * validStation.js file: a station validation function
    * It should reject if station id is not a positive integer
    * It should reject if station x is not in the range bewteen -180 ~ 180
    * It should reject if station y is not in the range bewteen -90 ~ 90
-* filterStations.js file: a filterStations function which filters the stations data
+* filterStations.js file: a filterStations function which filters the stations data and returns validated stations data
 
-To test and filter dataset, run:
+To validate dataset, run:
 ```
 npm run data/index.js
 ```
