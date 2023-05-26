@@ -33,7 +33,7 @@ All of them are under ***data*** folder.
    * It should reject if station y is not in the range bewteen -90 ~ 90
 * filterStations.js file: a filterStations function which filters the stations data and returns validated stations data
 
-To validate dataset, run:
+To test and validate dataset, run:
 ```
 npm run data/index.js
 ```
