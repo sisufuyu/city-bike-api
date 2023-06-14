@@ -16,29 +16,54 @@ To run the project on your local environment, Please make sure that Node.js (ver
 ## Data Preparation
 
 ### Dataset Testing
-The original journeys data are ***2021-05.csv***, ***2021-06.csv***, ***2021-07.csv***, and the original stations data are ***Helsinki-bike-stations.csv***, all of them are under ***data*** folder. 
+The original journeys data are ***2021-05.csv***, ***2021-06.csv***, ***2021-07.csv***, and the original stations data are ***Helsinki-bike-stations.csv***.  
+The validated data are ***2021-05-filter.csv***, ***2021-06-filter.csv***, ***2021-07-filter.csv***, ***Helsinki-bike-stations.csv***.  
+All of them are under ***data*** folder. 
+
 * validJourney.js file: a journey validation function
    * It should reject a journey where departure time is not a parseable DateTime (and the same for an arrival time)
    * It should reject a journey where arrival happens before departure
    * It should reject if a departure station id is not a positive integer (and the same with arrival and length of the trip)
    * It should accept a valid trip
    * It should reject a trip that is less than 10 seconds (this came from the pre-assignment)
-    
-* filterJourneys.js file: a filterJourneys function which filters the journeys data
+* filterJourneys.js file: a filterJourneys function which filters the journeys data and returns validated journeys data
 * validStation.js file: a station validation function
    * It should reject if station id is not a positive integer
    * It should reject if station x is not in the range bewteen -180 ~ 180
    * It should reject if station y is not in the range bewteen -90 ~ 90
-* filterStations.js file: a filterStations function which filters the stations data
+* filterStations.js file: a filterStations function which filters the stations data and returns validated stations data
+
+To test and validate dataset, run:
+```
+npm run data/index.js
+```
 
 ### Data Import
 
 There are many ways to import data in MongoDB, and I use MongoDB Compass for this purpose. 
-1. Create a database with name 'helsinki-city-bike-app', https://www.mongodb.com/basics/create-database
+1. [Create a database](https://www.mongodb.com/basics/create-database) with name 'helsinki-city-bike-app'
 2. Create two collections 'journeys' and 'stations' in the database.
 3. [Download and install MongoDB Compass](https://www.mongodb.com/docs/compass/master/install/?_ga=2.239545610.828859960.1684698811-745070963.1679086569&_gac=1.258739832.1684761270.CjwKCAjwpayjBhAnEiwA-7ena6WR8oZ9nKF3443BeDyPspH4lc_IhzG8P4hl2fcriAVC_aBjowyPyRoCdrYQAvD_BwE)
-4. Connect to MongoDB, https://www.mongodb.com/docs/compass/master/connect/
-5. Import Data, https://www.mongodb.com/docs/compass/current/import-export/
+4. [Connect to MongoDB](https://www.mongodb.com/docs/compass/master/connect/) in MongoDB Compass 
+5. [Import Data](https://www.mongodb.com/docs/compass/current/import-export/)  
+**Note**: 
+* The fields and types of journeys collection when importing: 
+    * departure: Date
+    * return: Date
+    * departureStationId: Number
+    * departureStationName: String
+    * returnStationId: Number
+    * returnStationName: String
+    * coveredDistance: Number
+    * duration: Number
+* The fields and types of journeys collection when importing: 
+    * id: Number
+    * name: String
+    * address: String
+    * city: String
+    * capacities: Number
+    * x: Number
+    * y: Number
 
 ## Installation
 
